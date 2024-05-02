@@ -1,0 +1,10 @@
+<div class="navbar">
+    @if (loginStatus$ | async) {
+        <p>{{login$ | async}}</p>
+
+        <p-button size="small" (click)="logout()">Wyloguj</p-button>
+    } @else {
+        <p-button class="login-btn" label="Login" (onClick)="openModal('Login')"></p-button>
+        <p-button class="register-btn" label="Register" (onClick)="openModal('Register')"></p-button>
+    }
+</div>

@@ -1,0 +1,20 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.container { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.nav-section {
+    order: 1;
+    width: 100%;
+}
+
+.dashboard-section {
+    order:2; 
+}
