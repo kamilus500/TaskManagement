@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { PropertyEnum } from '../components/enums/PropertyEnum';
+import { PropertyEnum } from '../enums/PropertyEnum';
 import { JwtdecryptionService } from './jwtdecryption.service';
 import { CustomJwtPayload } from '../models/CustomJwtPayload';
 

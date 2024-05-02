@@ -1,1 +1,5 @@
-<p>dashboard works!</p>
+@if (loginStatus$ | async) {
+    <p>Logged</p>
+} @else {
+    <p>Not logger</p>
+}

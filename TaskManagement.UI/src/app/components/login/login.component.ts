@@ -6,7 +6,7 @@ import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PropertyEnum } from '../enums/PropertyEnum';
+import { PropertyEnum } from '../../enums/PropertyEnum';
 
 @Component({
   selector: 'app-login',

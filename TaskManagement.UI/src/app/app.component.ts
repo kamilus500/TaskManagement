@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TokenService } from './services/token.service';
 import { AccountService } from './services/account.service';
-import { PropertyEnum } from './components/enums/PropertyEnum';
+import { PropertyEnum } from './enums/PropertyEnum';
 
 @Component({
   selector: 'app-root',
