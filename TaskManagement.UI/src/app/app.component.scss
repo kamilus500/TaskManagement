@@ -1,13 +1,16 @@
 body {
     margin: 0 auto;
     padding: 0;
+    height: 100vh;
+    margin: 0; /* Opcjonalnie, aby usunąć marginesy */
+    padding: 0; /* Opcjonalnie, aby usunąć padding */
+    overflow-y: auto;
 }
 
 .container { 
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
 }
 
 .nav-section {

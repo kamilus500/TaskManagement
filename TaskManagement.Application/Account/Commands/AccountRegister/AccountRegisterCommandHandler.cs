@@ -1,5 +1,7 @@
-﻿using MapsterMapper;
+﻿using Mapster;
+using MapsterMapper;
 using MediatR;
+using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Interfaces;
 
 namespace TaskManagement.Application.Account.Commands.AccountRegister
@@ -21,7 +23,7 @@ namespace TaskManagement.Application.Account.Commands.AccountRegister
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var newUser = _mapper.Map<Domain.Entities.User>(request);
+            var newUser = request.Adapt<User>();
 
             newUser.PasswordHashed = request.Password;
 

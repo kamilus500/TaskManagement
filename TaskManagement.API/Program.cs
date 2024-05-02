@@ -35,9 +35,9 @@ app.MapPost("/login", async (IMediator mediator, [FromBody] LoginDto LoginDto) =
 .WithName("Login")
 .WithOpenApi();
 
-app.MapPost("/register", (IMediator mediator, [FromBody] AccountRegisterCommand registerCommand) =>
+app.MapPost("/register", async (IMediator mediator, [FromBody] AccountRegisterCommand registerCommand) =>
 {
-    var userId = mediator.Send(registerCommand);
+    var userId = await mediator.Send(registerCommand);
 
     return Results.Created($"/register{userId}", userId);
 })
