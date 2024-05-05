@@ -7,7 +7,8 @@ namespace TaskManagement.Application.Account.Queries.AccountLogin
     public class AccountLoginQueryHandler : IRequestHandler<AccountLoginQuery, LoginResponse>
     {
         private readonly IAccountRepository _accountRepository;
-        public AccountLoginQueryHandler(IAccountRepository accountRepository) => _accountRepository = accountRepository;
+        public AccountLoginQueryHandler(IAccountRepository accountRepository)
+            => _accountRepository = accountRepository;
 
         public async Task<LoginResponse> Handle(AccountLoginQuery request, CancellationToken cancellationToken)
         {

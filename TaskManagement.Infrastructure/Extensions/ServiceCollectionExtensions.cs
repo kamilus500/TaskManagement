@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,6 +53,7 @@ namespace TaskManagement.Infrastructure.Extensions
             services.AddScoped<ErrorHandlingMiddleware>();
 
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<ITaskJobRepository, TaskJobRepository>();
 
             services.AddCors(options =>
             {

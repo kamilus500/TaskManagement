@@ -6,5 +6,7 @@
         public string Email { get; set; } = default!;
         public string Login { get; set; } = default!;
         public string PasswordHashed { get; set; } = default!;
+
+        public IEnumerable<TaskJob> TaskJobs { get; set; }
     }
 }
