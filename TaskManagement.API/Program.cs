@@ -56,6 +56,7 @@ app.MapPut("/update", async (IMediator mediator, [FromBody] UpdateCommand update
     return Results.Ok();
 })
 .WithName("Update")
+.RequireAuthorization()
 .WithOpenApi();
 
 app.MapDelete("/remove", async (IMediator mediator, [FromBody] RemoveCommand removeCommand) =>
@@ -65,6 +66,7 @@ app.MapDelete("/remove", async (IMediator mediator, [FromBody] RemoveCommand rem
     return Results.Ok();
 })
 .WithName("Remove")
+.RequireAuthorization()
 .WithOpenApi();
 
 app.MapGet("/get/{userId}", async (IMediator mediator, [FromRoute] string userId) =>
@@ -74,6 +76,7 @@ app.MapGet("/get/{userId}", async (IMediator mediator, [FromRoute] string userId
     return Results.Ok(taskJobs);
 })
 .WithName("Get")
+.RequireAuthorization()
 .WithOpenApi();
 
 app.MapGet("/getbyid/{taskJobId}", async (IMediator mediator, [FromRoute] string taskJobId) =>
@@ -88,6 +91,7 @@ app.MapGet("/getbyid/{taskJobId}", async (IMediator mediator, [FromRoute] string
     return Results.Ok(taskJob);
 })
 .WithName("GetById")
+.RequireAuthorization()
 .WithOpenApi();
 
 app.MapPost("/create", async (IMediator mediator, [FromBody] CreateCommand createCommand) =>
@@ -97,6 +101,7 @@ app.MapPost("/create", async (IMediator mediator, [FromBody] CreateCommand creat
     return Results.Created($"/create/{taskJobId}", taskJobId);
 })
 .WithName("Create")
+.RequireAuthorization()
 .WithOpenApi();
 
 app.UseAuthentication();
