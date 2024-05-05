@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TokenService } from './services/token.service';
 import { AccountService } from './services/account.service';
 import { PropertyEnum } from './enums/PropertyEnum';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,9 @@ import { PropertyEnum } from './enums/PropertyEnum';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'TaskManagement.UI';
-
+  title = 'Task Management';
+  loginStatus$: Observable<boolean> = this.accountService.status$;
+  
   constructor(private tokenService: TokenService, private accountService: AccountService) {
 
   }

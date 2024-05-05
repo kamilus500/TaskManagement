@@ -19,6 +19,9 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { TaskjobService } from './services/taskjob.service';
+import { DragDropModule } from 'primeng/dragdrop';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -38,12 +41,15 @@ import { PasswordModule } from 'primeng/password';
     DialogModule,
     BrowserAnimationsModule,
     InputTextModule,
-    PasswordModule
+    PasswordModule,
+    DragDropModule,
+    TableModule
   ],
   providers: [
     JwtdecryptionService,
     TokenService,
     AccountService,
+    TaskjobService,
     { 
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true 
     },

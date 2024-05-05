@@ -3,6 +3,10 @@
         <app-navbar></app-navbar>
     </div>
     <div class="dashboard-section">
-        <app-dashboard></app-dashboard>
+        @if(loginStatus$ | async) {
+            <app-dashboard></app-dashboard>
+        } @else {
+            <p>You have to login to look into tasks</p>
+        }
     </div>
 </div>
