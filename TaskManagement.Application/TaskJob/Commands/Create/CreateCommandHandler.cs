@@ -12,6 +12,8 @@ namespace TaskManagement.Application.TaskJob.Commands.Create
 
         public async Task<string> Handle(CreateCommand request, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var taskJob = request.Adapt<Domain.Entities.TaskJob>();
 
             taskJob.Id = Guid.NewGuid().ToString();

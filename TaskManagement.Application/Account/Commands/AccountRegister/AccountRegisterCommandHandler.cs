@@ -13,6 +13,8 @@ namespace TaskManagement.Application.Account.Commands.AccountRegister
 
         public async Task<string> Handle(AccountRegisterCommand request, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (request is null)
             {
                 throw new ArgumentNullException(nameof(request));

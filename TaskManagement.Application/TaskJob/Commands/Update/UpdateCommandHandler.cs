@@ -12,6 +12,8 @@ namespace TaskManagement.Application.TaskJob.Commands.Update
 
         public async Task Handle(UpdateCommand request, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var updatedTaskJob = request.Adapt<Domain.Entities.TaskJob>();
 
             await _taskJobRepository.Update(updatedTaskJob);

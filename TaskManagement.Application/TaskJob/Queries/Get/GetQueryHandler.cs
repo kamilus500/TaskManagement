@@ -13,6 +13,8 @@ namespace TaskManagement.Application.TaskJob.Queries.Get
 
         public async Task<IEnumerable<TaskJobDto>> Handle(GetQuery request, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (string.IsNullOrEmpty(request.UserId))
             {
                 throw new ArgumentNullException(nameof(request.UserId));

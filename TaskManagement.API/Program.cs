@@ -28,30 +28,30 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapPost("/login", async (IMediator mediator, [FromBody] LoginDto LoginDto) =>
+app.MapPost("/login", async (IMediator mediator, [FromBody] LoginDto LoginDto, CancellationToken cancellationToken) =>
 {
     var loginResponse = await mediator.Send(new AccountLoginQuery()
     {
         LoginDto = LoginDto
-    });
+    }, cancellationToken);
 
     return Results.Ok(loginResponse);
 })
 .WithName("Login")
 .WithOpenApi();
 
-app.MapPost("/register", async (IMediator mediator, [FromBody] AccountRegisterCommand registerCommand) =>
+app.MapPost("/register", async (IMediator mediator, [FromBody] AccountRegisterCommand registerCommand, CancellationToken cancellationToken) =>
 {
-    var userId = await mediator.Send(registerCommand);
+    var userId = await mediator.Send(registerCommand, cancellationToken);
 
     return Results.Created($"/register{userId}", userId);
 })
 .WithName("Register")
 .WithOpenApi();
 
-app.MapPut("/update", async (IMediator mediator, [FromBody] UpdateCommand updateCommand) =>
+app.MapPut("/update", async (IMediator mediator, [FromBody] UpdateCommand updateCommand, CancellationToken cancellationToken) =>
 {
-    await mediator.Send(updateCommand);
+    await mediator.Send(updateCommand, cancellationToken);
 
     return Results.Ok();
 })
@@ -59,9 +59,9 @@ app.MapPut("/update", async (IMediator mediator, [FromBody] UpdateCommand update
 .RequireAuthorization()
 .WithOpenApi();
 
-app.MapDelete("/remove", async (IMediator mediator, [FromBody] RemoveCommand removeCommand) =>
+app.MapDelete("/remove", async (IMediator mediator, [FromBody] RemoveCommand removeCommand, CancellationToken cancellationToken) =>
 {
-    await mediator.Send(removeCommand);
+    await mediator.Send(removeCommand, cancellationToken);
 
     return Results.Ok();
 })
@@ -69,9 +69,9 @@ app.MapDelete("/remove", async (IMediator mediator, [FromBody] RemoveCommand rem
 .RequireAuthorization()
 .WithOpenApi();
 
-app.MapGet("/get/{userId}", async (IMediator mediator, [FromRoute] string userId) =>
+app.MapGet("/get/{userId}", async (IMediator mediator, [FromRoute] string userId, CancellationToken cancellationToken) =>
 {
-    var taskJobs = await mediator.Send(new GetQuery(userId));
+    var taskJobs = await mediator.Send(new GetQuery(userId), cancellationToken);
 
     return Results.Ok(taskJobs);
 })
@@ -79,9 +79,9 @@ app.MapGet("/get/{userId}", async (IMediator mediator, [FromRoute] string userId
 .RequireAuthorization()
 .WithOpenApi();
 
-app.MapGet("/getbyid/{taskJobId}", async (IMediator mediator, [FromRoute] string taskJobId) =>
+app.MapGet("/getbyid/{taskJobId}", async (IMediator mediator, [FromRoute] string taskJobId, CancellationToken cancellationToken) =>
 {
-    var taskJob = await mediator.Send(new GetByIdQuery(taskJobId));
+    var taskJob = await mediator.Send(new GetByIdQuery(taskJobId), cancellationToken);
 
     if (taskJob is null)
     {
@@ -94,9 +94,9 @@ app.MapGet("/getbyid/{taskJobId}", async (IMediator mediator, [FromRoute] string
 .RequireAuthorization()
 .WithOpenApi();
 
-app.MapPost("/create", async (IMediator mediator, [FromBody] CreateCommand createCommand) =>
+app.MapPost("/create", async (IMediator mediator, [FromBody] CreateCommand createCommand, CancellationToken cancellationToken) =>
 {
-    var taskJobId = await mediator.Send(createCommand);
+    var taskJobId = await mediator.Send(createCommand, cancellationToken);
 
     return Results.Created($"/create/{taskJobId}", taskJobId);
 })
