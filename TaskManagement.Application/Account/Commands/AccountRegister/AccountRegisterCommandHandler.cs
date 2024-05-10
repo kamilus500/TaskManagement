@@ -24,7 +24,7 @@ namespace TaskManagement.Application.Account.Commands.AccountRegister
 
             newUser.PasswordHashed = request.Password;
 
-            return await _accountRepository.RegisterUser(newUser);
+            return await _accountRepository.RegisterUser(newUser, cancellationToken);
         }
     }
 }

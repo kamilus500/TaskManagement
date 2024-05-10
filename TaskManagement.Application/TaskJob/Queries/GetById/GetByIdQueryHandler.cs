@@ -13,19 +13,12 @@ namespace TaskManagement.Application.TaskJob.Queries.GetById
 
         public async Task<TaskJobDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-
             if (string.IsNullOrEmpty(request.TaskJobId))
             {
                 throw new ArgumentNullException(nameof(request.TaskJobId));
             }
 
-            var taskJobs = await _taskJobRepository.GetById(request.TaskJobId);
-
-            if (cancellationToken.IsCancellationRequested)
-            {
-                throw new OperationCanceledException("Operation was canceled");
-            }
+            var taskJobs = await _taskJobRepository.GetById(request.TaskJobId, cancellationToken);
 
             return taskJobs.Adapt<TaskJobDto>();
         }

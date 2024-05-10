@@ -5,8 +5,8 @@ namespace TaskManagement.Domain.Interfaces
 {
     public interface IAccountRepository
     {
-        Task<string> RegisterUser(User newUser);
+        Task<string> RegisterUser(User newUser, CancellationToken cancellationToken);
 
-        Task<string> GenerateJwt(LoginDto dto);
+        Task<string> GenerateJwt(LoginDto dto, CancellationToken cancellationToken);
     }
 }

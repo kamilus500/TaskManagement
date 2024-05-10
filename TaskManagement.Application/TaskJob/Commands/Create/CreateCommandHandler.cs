@@ -12,8 +12,6 @@ namespace TaskManagement.Application.TaskJob.Commands.Create
 
         public async Task<string> Handle(CreateCommand request, CancellationToken cancellationToken)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-
             var taskJob = request.Adapt<Domain.Entities.TaskJob>();
 
             taskJob.Id = Guid.NewGuid().ToString();
@@ -21,7 +19,7 @@ namespace TaskManagement.Application.TaskJob.Commands.Create
             taskJob.Status = Domain.Enums.StatusEnum.New;
             taskJob.IsDeleted = false;
             
-            var taskJobId = await _taskJobRepository.Create(taskJob);
+            var taskJobId = await _taskJobRepository.Create(taskJob, cancellationToken);
 
             return taskJobId;
         }

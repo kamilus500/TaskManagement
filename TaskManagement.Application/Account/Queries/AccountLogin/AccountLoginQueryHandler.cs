@@ -12,16 +12,12 @@ namespace TaskManagement.Application.Account.Queries.AccountLogin
 
         public async Task<LoginResponse> Handle(AccountLoginQuery request, CancellationToken cancellationToken)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            await Task.Delay(5000, cancellationToken);
-
             if (request.LoginDto is null)
             {
                 throw new ArgumentNullException(nameof(request.LoginDto));
             }
 
-            var token = await _accountRepository.GenerateJwt(request.LoginDto);
+            var token = await _accountRepository.GenerateJwt(request.LoginDto, cancellationToken);
 
             return new LoginResponse
             {

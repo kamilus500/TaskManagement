@@ -11,14 +11,12 @@ namespace TaskManagement.Application.TaskJob.Commands.Remove
 
         public async Task Handle(RemoveCommand request, CancellationToken cancellationToken)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-
             if (string.IsNullOrEmpty(request.TaskJobId))
             {
                 throw new ArgumentNullException(nameof(request.TaskJobId));
             }
 
-            await _taskJobRepository.Delete(request.TaskJobId);
+            await _taskJobRepository.Delete(request.TaskJobId, cancellationToken);
         }
     }
 }
