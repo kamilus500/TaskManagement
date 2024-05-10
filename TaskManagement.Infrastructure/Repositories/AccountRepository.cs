@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using TaskManagement.Domain.Entities;
 using TaskManagement.Domain.Interfaces;
 using TaskManagement.Domain.Models.Configs;
@@ -22,11 +23,11 @@ namespace TaskManagement.Infrastructure.Repositories
             _authenticationSettings = authenticationSettings;
         }
 
-        public async Task<string> GenerateJwt(LoginDto dto)
+        public async Task<string> GenerateJwt(LoginDto dto, CancellationToken cancellationToken)
         {
             var user = await _dbContext.Users
-                .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Login == dto.Login);
+            .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Login == dto.Login, cancellationToken);
 
             if (user is null)
             {
@@ -59,7 +60,7 @@ namespace TaskManagement.Infrastructure.Repositories
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<string> RegisterUser(User user)
+        public async Task<string> RegisterUser(User user, CancellationToken cancellationToken)
         {
             user.Id = Guid.NewGuid().ToString();
 
@@ -68,7 +69,7 @@ namespace TaskManagement.Infrastructure.Repositories
             user.PasswordHashed = hashedPassword;
 
             await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             return user.Id;
         }
